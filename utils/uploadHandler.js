@@ -21,7 +21,13 @@ let filterImage = function (req, file, cb) {
     }
 }
 let filterExel = function (req, file, cb) {
-    if (file.mimetype.includes('spreadsheetml')) {
+    let ext = path.extname(file.originalname).toLowerCase()
+    if (
+        file.mimetype.includes('spreadsheetml') ||
+        file.mimetype === 'application/vnd.ms-excel' ||
+        ext === '.xlsx' ||
+        ext === '.xls'
+    ) {
         cb(null, true)
     } else {
         cb(new Error("file khong dung dinh dang"))
